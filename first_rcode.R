@@ -26,4 +26,27 @@ sum(typos.draft2)
 sum(typos.draft2>0)
 typos.draft1-typos.draft2
 
+x=c(45,43,46,48,51,46,50,47,46,45)
+mean(x)
+median(x)
+max(x)
+min(x)
+
+x=c(x,48,49,51,50,49)
+length(x)
+x[16]=41
+x[17:20]=c(40,38,35,40)
+
+day=5
+mean(x[day:(day+4)])
+x[day:(day+4)]
+
+cummax(x)
+cummin(x)
+
+#Working with Mathematics
+whale=c(74,122,235,111,292,111,211,133,156,79)
+mean(whale)
+var(whale)
+sd(whale)
     
