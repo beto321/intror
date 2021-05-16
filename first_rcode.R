@@ -49,4 +49,35 @@ whale=c(74,122,235,111,292,111,211,133,156,79)
 mean(whale)
 var(whale)
 sd(whale)
-    
+
+#Categorical Data
+x=c("Yes","No","No", "Yes", "Yes")
+table(x)
+factor(x)
+
+#beer=scan()
+beer = c(3, 4, 1, 1, 3, 4, 3, 3, 1, 3, 2, 1, 2, 1, 2, 3, 2, 3, 1, 1, 1, 1, 4, 3, 1)
+barplot(beer)
+barplot(table(beer))
+barplot(table(beer)/length(beer))
+
+beer.counts=table(beer)
+pie(beer.counts)
+names(beer.counts)=c("domestic\n can","domestic\n bottle","microbrew","import")
+pie(beer.counts)
+pie(beer.counts,col=c("purple","green2","cyan","white"))
+
+#Numeric Measures
+sals=c(12,.4,5,2,50,8,3,1,4,0.25)
+mean(sals)
+var(sals)
+sd(sals)
+median(sals)
+fivenum(sals)
+summary(sals)
+sort(sals)
+
+data=c(10,17,18,25,28,28)
+summary(data)
+quantile(data,.25)
+quantile(data,c(.25,.75))
