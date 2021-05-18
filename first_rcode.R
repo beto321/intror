@@ -81,3 +81,17 @@ data=c(10,17,18,25,28,28)
 summary(data)
 quantile(data,.25)
 quantile(data,c(.25,.75))
+
+#Resistant measures of center and spread (p.16)
+mean(sals,trim=1/10)
+mean(sals,trim=2/10)
+IQR(sals)
+mad(sals)
+median(abs(sals-median(sals)))
+median(abs(sals-median(sals)))*1.4826
+
+#Stem-and-leaf Charts (p.17)
+#scores=scan()
+scores=c(2,3,16,23,14,12,4,13,2,0,0,0,6,28,31,14,4,8,2,5)
+apropos("stem")
+stem(scores)
