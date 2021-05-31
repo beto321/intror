@@ -95,3 +95,21 @@ median(abs(sals-median(sals)))*1.4826
 scores=c(2,3,16,23,14,12,4,13,2,0,0,0,6,28,31,14,4,8,2,5)
 apropos("stem")
 stem(scores)
+
+#Making numeric data categorical
+sals=c(12,0.4,5,2,50,8,3,1,4,0.25)
+cats=cut(sals,breaks=c(0,1,5,max(sals))) #we use 'cut' command
+cats
+table(cats) #organize
+levels(cats)=c("poor","rich","rolling in it")
+table(cats)
+
+#Histograms (p.18)
+#x=scan()
+x=c(29.6, 28.2, 19.6, 13.7, 13.0, 7.8, 3.4, 2.0, 1.9, 1.0, 0.7, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1)
+x
+hist(x)                     #frequencies
+hist(x,probability=TRUE)    #proportions(or probabilities)
+rug(jitter(x))              #add tick marks
+hist(x,breaks=10)           #10 breaks
+hist(x,breaks=c(0,1,2,3,4,5,10,20,max(x)))  #specify break points
