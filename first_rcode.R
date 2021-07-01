@@ -113,3 +113,12 @@ hist(x,probability=TRUE)    #proportions(or probabilities)
 rug(jitter(x))              #add tick marks
 hist(x,breaks=10)           #10 breaks
 hist(x,breaks=c(0,1,2,3,4,5,10,20,max(x)))  #specify break points
+
+#loading data of "movies" is missing
+
+#
+# library("ts") not working 
+
+install.packages("tswge")
+data("lynx")
+summary(lynx)
