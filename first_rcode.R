@@ -113,3 +113,13 @@ hist(x,probability=TRUE)    #proportions(or probabilities)
 rug(jitter(x))              #add tick marks
 hist(x,breaks=10)           #10 breaks
 hist(x,breaks=c(0,1,2,3,4,5,10,20,max(x)))  #specify break points
+
+#Boxplots
+library("UsingR") #library("Simple")
+data("movies")
+names(movies)
+attach(movies) #to access the names above
+boxplot(current,main="current receipts",horizontal = TRUE)
+boxplot(gross,main="gross receipts",horizontal = TRUE)
+detach(movies) #tidy up
+
