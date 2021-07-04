@@ -126,9 +126,6 @@ boxplot(current,main="current receipts",horizontal = TRUE)
 boxplot(gross,main="gross receipts",horizontal = TRUE)
 detach(movies) #tidy up
 
-
-
-
 #
 # library("ts") not working 
 
@@ -136,3 +133,38 @@ install.packages("tswge")
 data("lynx")
 summary(lynx)
 
+# FRECUENCY POLYGONS
+x=c(.314,.289,.282,.279,.275,.267,.266,.265,.256,.250,.249,.211,.161)
+tmp=hist(x)
+lines(c(min(tmp$breaks),tmp$mids,max(tmp$breaks)),c(0,tmp$counts,0),type="l")
+
+#DENSITIES
+data("faithful")
+attach(faithful) #make eruptions visible
+hist(eruptions,15,prob=T) #proportion, not frequencies
+lines(density(eruptions)) #lines make a curve, default bandwidth
+lines(density(eruptions,bw="SJ"),col="red") #Use SJ bandwidth in red
+
+#BIVARIATE DATA
+#Bivariate Categorial Data
+
+smokes=c("Y","N","N","Y","N","Y","Y","Y","N","Y")
+amount=c(1,2,2,3,3,1,2,1,3,2)
+table(smokes,amount)
+
+#build a proportions table
+tmp=table(smokes,amount)    #store the table
+old.digits=options("digits") #store de number of digits
+options(digits = 3)         #print only 3 decimal places
+prop.table(tmp,1)           #the rows sum to 1 now
+
+prop.table(tmp,2)           #the columns sum to 1 now
+
+prop.table(tmp)             #all numbers sum to 1
+
+options(digits = old.digits)  #restore the number of digits #THERE IS A ERROR OVER HERE
+
+#PLOTING TABULAR DATA (p. 20)
+
+
+  
