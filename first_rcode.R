@@ -166,5 +166,5 @@ options(digits = old.digits)  #restore the number of digits #THERE IS A ERROR OV
 
 #PLOTING TABULAR DATA (p. 20)
 
-
+barplot(table(smokes,amount))
   
