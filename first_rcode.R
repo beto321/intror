@@ -167,4 +167,15 @@ options(digits = old.digits)  #restore the number of digits #THERE IS A ERROR OV
 #PLOTING TABULAR DATA (p. 20)
 
 barplot(table(smokes,amount))
+barplot(table(amount,smokes))
+smokes=factor(smokes) #for names
+barplot(table(smokes,amount), beside = TRUE, legend.text = T) 
+barplot(table(amount,smokes), main="table(amount,somokes)",beside = TRUE,legend.text = c("less than 5","5-10","more than 10"))
   
+#Conditional proportions (p.25)
+
+prop=function(x) x/sum(x)
+apply(x,2,prop) #it's not working
+t(apply(x,1,prop)) #it's not working
+
+#Handling bivariate data: categorical vs. numerical (p.26)
