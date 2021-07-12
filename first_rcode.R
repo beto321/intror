@@ -179,3 +179,14 @@ apply(x,2,prop) #it's not working
 t(apply(x,1,prop)) #it's not working
 
 #Handling bivariate data: categorical vs. numerical (p.26)
+x=c(5,5,5,13,7,11,11,9,8,9)
+y=c(11,8,4,5,9,5,10,5,4,10)
+boxplot(x,y)
+
+#amount=scan()
+#category=scan()
+amount=c(5, 5, 5, 13, 7, 11, 11, 9, 8, 9, 11, 8, 4, 5, 9, 5, 10, 5, 4, 10)
+category=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+boxplot(amount~category)
+
+#Bivariate data: numerical vs. numerical (p.26)
