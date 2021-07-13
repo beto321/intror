@@ -190,3 +190,44 @@ category=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
 boxplot(amount~category)
 
 #Bivariate data: numerical vs. numerical (p.26)
+#1st. Comparing them
+
+#library("Simple")  doesn't work.  Use library("UsingR") instead
+library("UsingR")
+data("home")  #read in dataset home
+attach(home)
+names(home)
+boxplot(scale(old),scale(new)) #make a boxplot after scaling each  #it doesn't work
+detach(home)
+
+#using Stripchart for the same
+attach(home)
+stripchart(scale(old),scale(new)) #it doesn't work.  it says is invalid
+
+#using Violinplot
+simple.violinplot(scale(old),scale(new))
+
+#Using scatterplots to compare relationships
+data(home); attach(home)
+plot(old,new)
+detach(home)
+
+#what does attaching do?
+x=1:2
+y=c(2,4)
+df=data.frame(x=x,y=y)
+ls()    #list all the variables known
+rm(y)   #delete the y variable
+attach(df) #attach the dataframe
+ls()  #y is visible, but doesn't show up
+ls(pos=2) #y is in position 2 from being attached
+y  #y is visible because df is attached
+x #which x did we find, x of df[['x']]
+
+x=c(1,3) #assign to x
+df   #not the x in df
+detach(df)
+x  #assigned to real x variable
+y #y isn't found
+
+#LINEAR REGRESSION (P.28)
