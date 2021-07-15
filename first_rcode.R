@@ -231,3 +231,38 @@ x  #assigned to real x variable
 y #y isn't found
 
 #LINEAR REGRESSION (P.28)
+library("UsingR")
+data(home)
+attach(home)
+x=old
+y=new
+plot(x,y)
+abline(lm(y~x))
+detach(home)
+
+#doing the same with  simple.lm function
+data(home)
+attach(home)
+names(home)
+head(home$old)
+head(home$new)
+class(home$new)
+x=old
+y=new
+simple.lm(x,y)  #make the same plot and returns the regression coefficients
+
+#we can access the coefficients directly with the function "coef"
+lm.res=simple.lm(x,y)  #store the answer in lm.res
+coef(lm.res)
+coef(lm.res)[1]
+
+#RESIDUAL PLOTS
+simple.lm(x,y,show.residuals = TRUE)  #simple.lm can do it.  We just need to ask
+
+#to access residuals directly, you can use the command "resid" in "lm" result
+lm.res=simple.lm(x,y)
+the.residuals=resid(lm.res)  #this is how to get residuals
+plot(the.residuals)
+
+#CORRELATION COEFFICIENTS (p. 31)  #Pearson correlation
+
