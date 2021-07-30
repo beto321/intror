@@ -265,4 +265,18 @@ the.residuals=resid(lm.res)  #this is how to get residuals
 plot(the.residuals)
 
 #CORRELATION COEFFICIENTS (p. 31)  #Pearson correlation
+cor(x,y)  #to find R
+cor(x,y)^2 #to find R^2
 
+#The Spearman rank correlation
+rank(c(2,3,5,7,11))
+rank(c(5,3,2,7,11))
+rank(c(5,5,2,7,5))
+
+cor(rank(x), rank(y)) #0.925 as result, close to 1
+
+#another way to do the same
+cor.sp<- function(x,y) cor(rank(x),rank(y))
+cor.sp(x,y)  #0.925 as a result. the same!!
+
+#LOCATING POINTS (p.31)
