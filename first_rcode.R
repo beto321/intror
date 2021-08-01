@@ -280,3 +280,26 @@ cor.sp<- function(x,y) cor(rank(x),rank(y))
 cor.sp(x,y)  #0.925 as a result. the same!!
 
 #LOCATING POINTS (p.31)
+library(UsingR)  #use this package to get into Florida dataset
+data("florida")
+names(florida)
+attach(florida)   #so we can get at the names BUSH, ...
+simple.lm(BUSH,BUCHANAN)
+detach(florida)   #clean up
+#to identify outliers, use the "identify" function
+attach(florida)
+identify(BUSH,BUCHANAN,n=2)  #n=2 gives two points
+BUSH[50]
+BUCHANAN[50]
+florida[50,]
+
+simple.lm(BUSH[-50],BUCHANAN[-50])  #This model fits better
+
+#Using simple.lm to predict
+simple.lm(BUSH[-50],BUCHANAN[-50],pred = BUSH[50])
+
+#RESISTANT REGRESSION
+simple.lm(BUSH,BUCHANAN)
+abline(65.57350,0.00348)
+
+#using rlm or lqs for resistant regression (p.33)
