@@ -303,3 +303,37 @@ simple.lm(BUSH,BUCHANAN)
 abline(65.57350,0.00348)
 
 #using rlm or lqs for resistant regression (p.33)
+library(MASS)
+attach(florida)
+plot(BUSH,BUCHANAN)  #a scatter plot
+abline(lm(BUCHANAN~BUSH), lty=1)  #lty sets line type
+abline(rlm(BUCHANAN~BUSH), lty=2)  #lty sets line type
+#legend(locator(1),legend = c("lm","rlm"),lty=1:2) #add legend #doen't work
+detach(florida)
+
+attach(florida)
+plot(BUSH,BUCHANAN)
+abline(rlm(BUCHANAN~BUSH),lty=1)
+abline(rlm(BUCHANAN[-50]~BUSH[-50]),lty=2)
+
+#R BASICS: Ploting graphs using R (p. 34)
+#creating new pltos with plot and curve
+x=seq(0,4,by=.1)  #create the x values
+plot(x,x^2,type = "l") #type="l" to make line
+curve(x^2,0,4)
+
+#adding to a graph with points, abline, lines, and curve
+miles=(0:8)*4
+#tread = scan()
+tread=c(394, 329, 291, 255, 229, 204, 179, 163, 150)
+plot(miles, tread)
+abline(lm(tread~miles ))
+## or as we know the intercept and slope
+abline(360,-7.3)
+## or using points
+points(miles,360-7.3*miles,type="l")
+## or using lines
+lines(miles, 360 - 7.3 * miles)
+curve(360 - 7.3*x,add = T)  #add a function of x
+
+#MULTIVARIATE DATA (p. 36)
