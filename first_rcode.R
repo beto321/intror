@@ -337,3 +337,18 @@ lines(miles, 360 - 7.3 * miles)
 curve(360 - 7.3*x,add = T)  #add a function of x
 
 #MULTIVARIATE DATA (p. 36)
+weigth=c(150,135,210,140)
+heigth=c(65,61,70,65)
+gender=c("Fe","Fe","M","Fe")
+study=data.frame(weigth,heigth,gender)  #make de data frame
+study
+
+#diferent names are possible if desired
+study=data.frame(w=weigth,h=heigth,g=gender)
+study
+
+#you can give names to the rows
+row.names(study)=c("Mary","Alice","Bob","Judy")
+study
+
+#Accesing data in data frames (p.37)
