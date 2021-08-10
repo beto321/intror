@@ -352,3 +352,14 @@ row.names(study)=c("Mary","Alice","Bob","Judy")
 study
 
 #Accesing data in data frames (p.37)
+rm(weigth)  #clean out old copy
+attach(study)
+weigth
+
+study[,'weigth']  #all rows, just the weight column
+study[,1]  #all rows, just the first column
+study[,1:2] #all rows, just the first two columns
+study['Mary',]  #only Mary's info
+study['Mary','weigth'] #only Mary's weight
+
+study$weigth
