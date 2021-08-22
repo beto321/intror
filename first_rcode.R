@@ -337,14 +337,14 @@ lines(miles, 360 - 7.3 * miles)
 curve(360 - 7.3*x,add = T)  #add a function of x
 
 #MULTIVARIATE DATA (p. 36)
-weigth=c(150,135,210,140)
-heigth=c(65,61,70,65)
+weight=c(150,135,210,140)
+height=c(65,61,70,65)
 gender=c("Fe","Fe","M","Fe")
-study=data.frame(weigth,heigth,gender)  #make de data frame
+study=data.frame(weight,height,gender)  #make de data frame
 study
 
 #diferent names are possible if desired
-study=data.frame(w=weigth,h=heigth,g=gender)
+study=data.frame(w=weight,h=height,g=gender)
 study
 
 #you can give names to the rows
@@ -352,14 +352,18 @@ row.names(study)=c("Mary","Alice","Bob","Judy")
 study
 
 #Accesing data in data frames (p.37)
-rm(weigth)  #clean out old copy
+rm(weight)   #clean out old copy
 attach(study)
-weigth
+weight
 
-study[,'weigth']  #all rows, just the weight column
+study[,'weight']  #all rows, just the weight column
 study[,1]  #all rows, just the first column
 study[,1:2] #all rows, just the first two columns
 study['Mary',]  #only Mary's info
-study['Mary','weigth'] #only Mary's weight
+study['Mary','weight'] #only Mary's weight
 
-study$weigth
+study$weight
+
+
+#install.packages('jsonlite', dependencies=TRUE, repos='http://cran.rstudio.com/')
+
