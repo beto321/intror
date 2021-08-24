@@ -362,8 +362,24 @@ study[,1:2] #all rows, just the first two columns
 study['Mary',]  #only Mary's info
 study['Mary','weight'] #only Mary's weight
 
-study$weight
-
-
 #install.packages('jsonlite', dependencies=TRUE, repos='http://cran.rstudio.com/')
+study$weight        #using $
+study[['weight']]   #using the name
+study[['w']]        #unambiguous shortcuts are ok
+study[[1]]          #by position
+study[study$gender=='Fe',]  #use $ to access gender via a list
+
+#MANIPULATING DATA FRAMES: stack and unstack (p. 38)
+data(PlantGrowth)
+PlantGrowth
+
+#brute force way
+attach(PlantGrowth)
+weight.ctrl=weight[group=="ctrl"]
+#using 'unstack' function
+unstack(PlantGrowth)
+
+boxplot(unstack(PlantGrowth))
+
+#USING R'S MODEL FORMULA NOTATION (p.39)
 
