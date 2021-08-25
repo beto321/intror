@@ -382,4 +382,34 @@ unstack(PlantGrowth)
 boxplot(unstack(PlantGrowth))
 
 #USING R'S MODEL FORMULA NOTATION (p.39)
+boxplot(weight ~ group) #response ~ predictor.  It is read: "Y is modeled by X" 
 
+#WAYS TO VIEW MULTIVARIATE DATA (p. 39)
+library(MASS)
+data(Cars93)
+attach(Cars93)
+#make some categorical variable using cut
+price=cut(Price,c(0,12,20,max(Price)))
+levels(price)=c("cheap","okay","expensive")
+mpg=cut(MPG.highway,c(0,20,30,max(MPG.highway)))
+levels(mpg)=c("gas guzzler","okay","miser")
+#now look at the relationships
+table(Type)
+table(price,Type)
+table(price,Type,mpg)
+
+#barplots to summarize data
+barplot(table(price,Type),beside=T) #the price by different types
+barplot(table(Type,price),beside=T) #type by different prices
+
+#example: Boxplot of samples of random data
+y=rnorm(1000)           #1000 random numbers
+f=factor(rep(1:10,100)) #the number 1,2... 10 100 times
+boxplot(y~f,main="Boxplot of normal random data with model notation")
+
+#stripcharts
+x=rnorm(100)
+y=factor(rep(1:10,10))
+stripchart(x~y)
+
+#violin plots and density plots (p.41)
