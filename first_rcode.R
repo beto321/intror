@@ -413,3 +413,19 @@ y=factor(rep(1:10,10))
 stripchart(x~y)
 
 #violin plots and density plots (p.41)
+par(mfrow=c(1,3))     # 3 graphs per page
+data("InsectSprays")  # load in the data
+boxplot(count~spray,data=InsectSprays,col="lightgray")
+library(UsingR) #to work simple.violinplot you need "UsingR" library
+simple.violinplot(count~spray,data=InsectSprays,col="lightgray")
+simple.densityplot(count~spray,data=InsectSprays)
+
+#scatterplots
+data("ToothGrowth")
+attach(ToothGrowth)
+head(ToothGrowth)
+
+plot(len~dose,pch=as.numeric(supp))             #it's working
+tmp=levels(supp)                                #it's working
+legend(locator(1),legend=tmp,pch=1:length(tmp)) #it's working
+detach(ToothGrowth)
