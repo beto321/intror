@@ -429,3 +429,18 @@ plot(len~dose,pch=as.numeric(supp))             #it's working
 tmp=levels(supp)                                #it's working
 legend(locator(1),legend=tmp,pch=1:length(tmp)) #it's working
 detach(ToothGrowth)
+
+#Example: GDP vs. CO2 emissions
+library(UsingR)
+data(emissions)
+attach(emissions)
+simple.scatterplot(perCapita,CO2)
+title("GDP/capita vs. CO2 emissions 1999")
+detach(emissions)
+
+#paired scatterplots 
+pairs(emissions)
+
+#THE LATTICE PACKAGE (p. 44)
+#histograms
+
