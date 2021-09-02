@@ -443,4 +443,30 @@ pairs(emissions)
 
 #THE LATTICE PACKAGE (p. 44)
 #histograms
+library(UsingR)
+data("Cars93")
+histogram(~ Max.Price | Cylinders, data=Cars93)
 
+#Boxplots
+bwplot(~ Max.Price | Cylinders, data = Cars93)
+
+#scatterplots
+attach(Cars93)
+xyplot(MPG.highway ~ Fuel.tank.capacity | Type)
+## plot with a regression line
+## first define a regression line drawing function
+plot.regression=function(x,y){
+  panel.xyplot(x,y)
+  panel.abline(lm(y~x))
+}
+trellis.device(bg="white") #se background to white
+xyplot(MPG.highway ~ Fuel.tank.capacity | Type, panel=plot.regression)
+
+
+#RANDOM DATA (p. 45)
+sample(1:6,10,replace = T)
+
+RollDie=function(n) sample(1:6,n,replace=T)
+RollDie(5)
+
+#Random number generatos in R - The "r" functions (p.47)
