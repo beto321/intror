@@ -470,3 +470,7 @@ RollDie=function(n) sample(1:6,n,replace=T)
 RollDie(5)
 
 #Random number generatos in R - The "r" functions (p.47)
+#uniform
+runif(1,0,2)  #time at light
+runif(5,0,2)  #time at 5 lights
+runif(5)      #5 random numbers in [0,1]
