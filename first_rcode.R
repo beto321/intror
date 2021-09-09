@@ -474,3 +474,17 @@ RollDie(5)
 runif(1,0,2)  #time at light
 runif(5,0,2)  #time at 5 lights
 runif(5)      #5 random numbers in [0,1]
+
+x=runif(100)  #get the random numbers
+hist(x,probability=TRUE, col=gray(.9),main="uniform on [0,1]")
+curve(dunif(x,0,1),add=T)
+
+#normal
+rnorm(1,100,16)  # an IQ Score
+rnorm(1,mean=280,sd=10) #how long for a baby(10 days early)
+
+x=rnorm(100)
+hist(x,probability=TRUE, col=gray(0.9),main="normal mu=0, sigma=1")
+curve(dnorm(x),add=T)
+
+#binomial (p.47)
