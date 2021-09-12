@@ -488,3 +488,63 @@ hist(x,probability=TRUE, col=gray(0.9),main="normal mu=0, sigma=1")
 curve(dnorm(x),add=T)
 
 #binomial (p.47)
+n=1; p=0.5  #set the probability
+rbinom(1,n,p) #differente each time
+rbinom(10,n,p) #10 differente such numbers
+
+#to generate binomial numbers...
+n=10; p=0.5
+rbinom(1,n,p)  # 6 successes in 10 trials
+rbinom(5,n,p)  # 5 binomial numbers
+
+n=5; p=0.25   #change as appropriate
+x=rbinom(100,n,p) #100 random numbers
+hist(x,probability = TRUE)
+#use points, not curve as dbinom wants integers only for x
+xvals=0:n; points(xvals,dbinom(xvals,n,p),type="h",lwd=3)
+points(xvals, dbinom(xvals,n,p),type="p",lwd=3)
+
+#exponential
+x=rexp(100,1/2500)
+hist(x,probability = TRUE, col=gray(0.9),main="exponential mean=2500")
+curve(dexp(x,1/2500),add=T)
+
+##Sampling with and without replacement using 'sample'
+#Roll a dice
+sample(1:6,10,replace = TRUE)
+#toss a coin
+sample(c("H","T"),10, replace=TRUE)
+#pick 6 of 54 (a lottery)
+sample(1:54, 6)
+#pick a card
+cards=paste(rep(c("A",2:10,"J","Q","K"),4),c("H","D","S","C"))
+sample(cards,5) # a pair of jacks, no replacement
+#roll 2 dice, Even fancier
+dice=as.vector(outer(1:6,1:6,paste))
+sample(dice,5,replace = TRUE) #replace when rolling dice
+
+## A bootstrap sample (p.49)
+data("faithful")  #part of R's base
+names(faithful)
+eruptions=faithful[['eruptions']] #or attach and detach faithful
+sample(eruptions,10,replace = TRUE)
+hist(eruptions,breaks = 25)  #the dataset
+#the bootstrap sample
+hist(sample(eruptions,100,replace = TRUE),breaks = 25)
+
+## d, p and q functions(p.50)
+pnorm(0.7)    #standard normal
+pnorm(0.7,1,1) # normal mean 1, std 1
+pnorm(0.7,lower.tail=F)
+qnorm(0.75)
+
+#standardizing, 'scale' and z scores
+x=rnorm(5,100,16)
+x
+z=(x-100)/16
+z
+pnorm(z)
+pnorm(x,100,16)  # enter in parameters
+
+##SIMULATIONS (p.51)
+## The central limit theorem
