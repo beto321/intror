@@ -548,3 +548,39 @@ pnorm(x,100,16)  # enter in parameters
 
 ##SIMULATIONS (p.51)
 ## The central limit theorem
+n=10; p=0.25; S=rbinom(1,n,p)
+(S-n*p)/sqrt(n*p*(1-p))
+
+n=10; p=0.25; S=rbinom(100,n,p) #generate 100 random numbers
+X=(S-n*p)/sqrt(n*p*(1-p))
+
+#for loops
+results=numeric(0)
+for(i in 1:100){
+  S=rbinom(1,n,p)
+  results[i]=(S-n*p)/sqrt(n*p*(1-p))
+}
+hist(results)
+
+#R Basics: Syntax for for
+primes=c(2,3,5,7,11)
+#loop over indices of primes with this
+for(i in 1:5) print(primes[i])
+#or better, loop directly
+for(i in primes) print(i)
+
+#CLT with normal data (p. 53)
+results=c()
+mu=0; sigma=1
+for(i in 1:200){
+  X=rnorm(100,mu,sigma) #generate random data
+  results[i]=(mean(X)-mu)/(sigma/sqrt(100))
+}
+
+#Normal plots
+x=rnorm(100,0,1); qqnorm(x,main='Normal(0,1)'); qqline(x)
+x=rnorm(100,10,15); qqnorm(x,main='Normal(10,15)'); qqline(x)
+x=rexp(100,1/10); qqnorm(x,main='exponential mu=10'); qqline(x)
+x=runif(100,0,1); qqnorm(x,main='unif(0,1)'); qqline(x)
+
+#using simple.sim and functions(p.54)
