@@ -584,3 +584,43 @@ x=rexp(100,1/10); qqnorm(x,main='exponential mu=10'); qqline(x)
 x=runif(100,0,1); qqnorm(x,main='unif(0,1)'); qqline(x)
 
 #using simple.sim and functions(p.54)
+
+#not working, we need to know n and p
+library(UsingR)
+f=function() {
+  S=rbinom(1,n,p)
+  (S-n*p)/sqrt(n*p*(1-p))
+}
+x=simple.sim(100,f)
+hist(x)
+#not working, we need to know n and p
+
+f=function(n=100,p=0.5) {
+  S=rbinom(1,n,p)
+  (S-n*p)/sqrt(n*p*(1-p))
+}
+simple.sim(1000,f,100,0.5)
+
+x=rnorm(100)
+find.IQR = function(x) {
+  five.num=fivenum(x)
+  five.num[4]-five.num[2]
+}
+find.IQR(x)
+
+#Example: A function to sum normal numbers
+f=function(n=100,mu=0,sigma=1) {
+  nos=rnorm(n,mu,sigma)
+  (mean(nos)-mu)/(sigma/sqrt(n))
+}
+simulations=simple.sim(100,f,100,5,5)
+hist(simulations,breaks=10,prob=TRUE)
+
+#Example: CLT with exponential data
+f=function(n=100,mu=10) (mean(rexp(n,1/mu))-mu)/(mu/sqrt(n))
+
+xvals=seq(-3,3,0.01) #for density plot
+hist(simple.sim(100,f,1,10),probability=TRUE,main="n=1",col=gray(0.95))
+points(xvals,dnorm(xvals,0,1),type="l") #plot normal curve
+
+##EXPLORATORY DATA ANALYSIS (p. 58)
