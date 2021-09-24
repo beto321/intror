@@ -382,4 +382,245 @@ unstack(PlantGrowth)
 boxplot(unstack(PlantGrowth))
 
 #USING R'S MODEL FORMULA NOTATION (p.39)
+boxplot(weight ~ group) #response ~ predictor.  It is read: "Y is modeled by X" 
 
+#WAYS TO VIEW MULTIVARIATE DATA (p. 39)
+library(MASS)
+data(Cars93)
+attach(Cars93)
+#make some categorical variable using cut
+price=cut(Price,c(0,12,20,max(Price)))
+levels(price)=c("cheap","okay","expensive")
+mpg=cut(MPG.highway,c(0,20,30,max(MPG.highway)))
+levels(mpg)=c("gas guzzler","okay","miser")
+#now look at the relationships
+table(Type)
+table(price,Type)
+table(price,Type,mpg)
+
+#barplots to summarize data
+barplot(table(price,Type),beside=T) #the price by different types
+barplot(table(Type,price),beside=T) #type by different prices
+
+#example: Boxplot of samples of random data
+y=rnorm(1000)           #1000 random numbers
+f=factor(rep(1:10,100)) #the number 1,2... 10 100 times
+boxplot(y~f,main="Boxplot of normal random data with model notation")
+
+#stripcharts
+x=rnorm(100)
+y=factor(rep(1:10,10))
+stripchart(x~y)
+
+#violin plots and density plots (p.41)
+par(mfrow=c(1,3))     # 3 graphs per page
+data("InsectSprays")  # load in the data
+boxplot(count~spray,data=InsectSprays,col="lightgray")
+library(UsingR) #to work simple.violinplot you need "UsingR" library
+simple.violinplot(count~spray,data=InsectSprays,col="lightgray")
+simple.densityplot(count~spray,data=InsectSprays)
+
+#scatterplots
+data("ToothGrowth")
+attach(ToothGrowth)
+head(ToothGrowth)
+
+plot(len~dose,pch=as.numeric(supp))             #it's working
+tmp=levels(supp)                                #it's working
+legend(locator(1),legend=tmp,pch=1:length(tmp)) #it's working
+detach(ToothGrowth)
+
+#Example: GDP vs. CO2 emissions
+library(UsingR)
+data(emissions)
+attach(emissions)
+simple.scatterplot(perCapita,CO2)
+title("GDP/capita vs. CO2 emissions 1999")
+detach(emissions)
+
+#paired scatterplots 
+pairs(emissions)
+
+#THE LATTICE PACKAGE (p. 44)
+#histograms
+library(UsingR)
+data("Cars93")
+histogram(~ Max.Price | Cylinders, data=Cars93)
+
+#Boxplots
+bwplot(~ Max.Price | Cylinders, data = Cars93)
+
+#scatterplots
+attach(Cars93)
+xyplot(MPG.highway ~ Fuel.tank.capacity | Type)
+## plot with a regression line
+## first define a regression line drawing function
+plot.regression=function(x,y){
+  panel.xyplot(x,y)
+  panel.abline(lm(y~x))
+}
+trellis.device(bg="white") #se background to white
+xyplot(MPG.highway ~ Fuel.tank.capacity | Type, panel=plot.regression)
+
+
+#RANDOM DATA (p. 45)
+sample(1:6,10,replace = T)
+
+RollDie=function(n) sample(1:6,n,replace=T)
+RollDie(5)
+
+#Random number generatos in R - The "r" functions (p.47)
+#uniform
+runif(1,0,2)  #time at light
+runif(5,0,2)  #time at 5 lights
+runif(5)      #5 random numbers in [0,1]
+
+x=runif(100)  #get the random numbers
+hist(x,probability=TRUE, col=gray(.9),main="uniform on [0,1]")
+curve(dunif(x,0,1),add=T)
+
+#normal
+rnorm(1,100,16)  # an IQ Score
+rnorm(1,mean=280,sd=10) #how long for a baby(10 days early)
+
+x=rnorm(100)
+hist(x,probability=TRUE, col=gray(0.9),main="normal mu=0, sigma=1")
+curve(dnorm(x),add=T)
+
+#binomial (p.47)
+n=1; p=0.5  #set the probability
+rbinom(1,n,p) #differente each time
+rbinom(10,n,p) #10 differente such numbers
+
+#to generate binomial numbers...
+n=10; p=0.5
+rbinom(1,n,p)  # 6 successes in 10 trials
+rbinom(5,n,p)  # 5 binomial numbers
+
+n=5; p=0.25   #change as appropriate
+x=rbinom(100,n,p) #100 random numbers
+hist(x,probability = TRUE)
+#use points, not curve as dbinom wants integers only for x
+xvals=0:n; points(xvals,dbinom(xvals,n,p),type="h",lwd=3)
+points(xvals, dbinom(xvals,n,p),type="p",lwd=3)
+
+#exponential
+x=rexp(100,1/2500)
+hist(x,probability = TRUE, col=gray(0.9),main="exponential mean=2500")
+curve(dexp(x,1/2500),add=T)
+
+##Sampling with and without replacement using 'sample'
+#Roll a dice
+sample(1:6,10,replace = TRUE)
+#toss a coin
+sample(c("H","T"),10, replace=TRUE)
+#pick 6 of 54 (a lottery)
+sample(1:54, 6)
+#pick a card
+cards=paste(rep(c("A",2:10,"J","Q","K"),4),c("H","D","S","C"))
+sample(cards,5) # a pair of jacks, no replacement
+#roll 2 dice, Even fancier
+dice=as.vector(outer(1:6,1:6,paste))
+sample(dice,5,replace = TRUE) #replace when rolling dice
+
+## A bootstrap sample (p.49)
+data("faithful")  #part of R's base
+names(faithful)
+eruptions=faithful[['eruptions']] #or attach and detach faithful
+sample(eruptions,10,replace = TRUE)
+hist(eruptions,breaks = 25)  #the dataset
+#the bootstrap sample
+hist(sample(eruptions,100,replace = TRUE),breaks = 25)
+
+## d, p and q functions(p.50)
+pnorm(0.7)    #standard normal
+pnorm(0.7,1,1) # normal mean 1, std 1
+pnorm(0.7,lower.tail=F)
+qnorm(0.75)
+
+#standardizing, 'scale' and z scores
+x=rnorm(5,100,16)
+x
+z=(x-100)/16
+z
+pnorm(z)
+pnorm(x,100,16)  # enter in parameters
+
+##SIMULATIONS (p.51)
+## The central limit theorem
+n=10; p=0.25; S=rbinom(1,n,p)
+(S-n*p)/sqrt(n*p*(1-p))
+
+n=10; p=0.25; S=rbinom(100,n,p) #generate 100 random numbers
+X=(S-n*p)/sqrt(n*p*(1-p))
+
+#for loops
+results=numeric(0)
+for(i in 1:100){
+  S=rbinom(1,n,p)
+  results[i]=(S-n*p)/sqrt(n*p*(1-p))
+}
+hist(results)
+
+#R Basics: Syntax for for
+primes=c(2,3,5,7,11)
+#loop over indices of primes with this
+for(i in 1:5) print(primes[i])
+#or better, loop directly
+for(i in primes) print(i)
+
+#CLT with normal data (p. 53)
+results=c()
+mu=0; sigma=1
+for(i in 1:200){
+  X=rnorm(100,mu,sigma) #generate random data
+  results[i]=(mean(X)-mu)/(sigma/sqrt(100))
+}
+
+#Normal plots
+x=rnorm(100,0,1); qqnorm(x,main='Normal(0,1)'); qqline(x)
+x=rnorm(100,10,15); qqnorm(x,main='Normal(10,15)'); qqline(x)
+x=rexp(100,1/10); qqnorm(x,main='exponential mu=10'); qqline(x)
+x=runif(100,0,1); qqnorm(x,main='unif(0,1)'); qqline(x)
+
+#using simple.sim and functions(p.54)
+
+#not working, we need to know n and p
+library(UsingR)
+f=function() {
+  S=rbinom(1,n,p)
+  (S-n*p)/sqrt(n*p*(1-p))
+}
+x=simple.sim(100,f)
+hist(x)
+#not working, we need to know n and p
+
+f=function(n=100,p=0.5) {
+  S=rbinom(1,n,p)
+  (S-n*p)/sqrt(n*p*(1-p))
+}
+simple.sim(1000,f,100,0.5)
+
+x=rnorm(100)
+find.IQR = function(x) {
+  five.num=fivenum(x)
+  five.num[4]-five.num[2]
+}
+find.IQR(x)
+
+#Example: A function to sum normal numbers
+f=function(n=100,mu=0,sigma=1) {
+  nos=rnorm(n,mu,sigma)
+  (mean(nos)-mu)/(sigma/sqrt(n))
+}
+simulations=simple.sim(100,f,100,5,5)
+hist(simulations,breaks=10,prob=TRUE)
+
+#Example: CLT with exponential data
+f=function(n=100,mu=10) (mean(rexp(n,1/mu))-mu)/(mu/sqrt(n))
+
+xvals=seq(-3,3,0.01) #for density plot
+hist(simple.sim(100,f,1,10),probability=TRUE,main="n=1",col=gray(0.95))
+points(xvals,dnorm(xvals,0,1),type="l") #plot normal curve
+
+##EXPLORATORY DATA ANALYSIS (p. 58)
