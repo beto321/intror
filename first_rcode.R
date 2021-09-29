@@ -624,3 +624,10 @@ hist(simple.sim(100,f,1,10),probability=TRUE,main="n=1",col=gray(0.95))
 points(xvals,dnorm(xvals,0,1),type="l") #plot normal curve
 
 ##EXPLORATORY DATA ANALYSIS (p. 58)
+#install.packages("evaluate")
+library(UsingR)
+data(homedata)  #from UsingR package
+attach(homedata)
+hist(y1970)
+hist(y2000)
+detach(homedata)  #clean up
