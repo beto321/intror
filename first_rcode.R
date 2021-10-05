@@ -631,3 +631,28 @@ attach(homedata)
 hist(y1970)
 hist(y2000)
 detach(homedata)  #clean up
+
+attach(homedata)
+simple.eda(y1970)
+simple.eda(y2000)
+detach(homedata)
+
+data("exec.pay")
+simple.eda(exec.pay)
+log.exec.pay=log(exec.pay[exec.pay>0])/log(10)
+simple.eda(log.exec.pay)
+
+#Example: Taxi time at EWR (p.60)
+data(ewr)
+names(ewr)
+airnames=names(ewr)
+ewr.actual=ewr[,3:10]
+boxplot(ewr.actual)
+
+par(mfrow=c(2,4)) # 2 rows and 4 columns
+attach(ewr)
+for(i in 3:10) boxplot(ewr[,i] ~ as.factor(inorout),main=airnames[i])
+detach(ewr)
+par(mfrow=c(1,1))
+
+#Example: Symmetric or skewed (p.62)
