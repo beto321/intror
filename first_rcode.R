@@ -655,4 +655,30 @@ for(i in 3:10) boxplot(ewr[,i] ~ as.factor(inorout),main=airnames[i])
 detach(ewr)
 par(mfrow=c(1,1))
 
-#Example: Symmetric or skewed (p.62)
+#Example: Symmetric or skewed (p.62)  #NOT WORKING: n is missing
+## symeetirc: shor, regular then long
+X=runif(100); boxplot(X,horizontal=T,bty=n)
+X=rnorm(100); boxplot(X,horizontal=T,bty=n)
+X=rt(100,2);boxplot(X, horizontal=T,bty=n)
+##skewed: shor, regular then long
+#triangle distribution
+X=sample(1:6,100,p=7-(1:6),replace=T);boxplot(X,horizontal=T,bty=n)
+X=abs(rnorm(200)); boxplot(X, horizontal=T,bty=n)
+X=rexp(200); boxplot(X,horizontal=T, bty=n)
+#NOT WORKING: n is missing
+
+#CONFIDENCE INTERVAL ESTIMATION (p. 63)
+alpha=c(0.2,0.1,0.05,0.001)
+zstar=qnorm(1-alpha/2)
+zstar
+2*(1-pnorm(zstar))
+
+m=50; n=20; p=0.5 #toss 20 coins 50 times
+phat=rbinom(m,n,p)/n  #divide by n for proportions
+SE=sqrt(phat*(1-phat)/n) #compute SE
+alpha=0.10; zstar=qnorm(1-alpha/2)
+matplot(rbind(phat-zstar*SE, phat+zstar*SE), rbind(1:m,1:m),type="l",lty=1)
+abline(v=p)
+
+#Proportion test (P. 65)
+
