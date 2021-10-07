@@ -681,4 +681,19 @@ matplot(rbind(phat-zstar*SE, phat+zstar*SE), rbind(1:m,1:m),type="l",lty=1)
 abline(v=p)
 
 #Proportion test (P. 65)
+prop.test(42,100)
+prop.test(42,100,conf.level=0.90)
 
+#the z-test (p.66)
+#define a function
+simple.z.test=function(x,sigma,conf.level=0.95){
+  n=length(x);xbar=mean(x)
+  alpha=1-conf.level
+  zstar=qnorm(1-alpha/2)
+  SE=sigma/sqrt(n)
+  xbar+c(-zstar*SE,zstar*SE)
+
+}
+simple.z.test(x,1.5) #not working, x is missing
+
+#the t-test (p.67)
